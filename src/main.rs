@@ -1,12 +1,13 @@
-use crate::sqlite::{sqlite::create, Item};
+use crate::sqlite::{sqlite::{create, read}, Item};
 
 pub mod sqlite;
 
 fn main() {
-    let melaleuca = Item {
+    let item = Item {
 	name: String::from("Melaleuca"),
 	stock: 1,
     };
-    create(melaleuca);
+    create(item);
+    read(String::from("users"));
     println!("Sucess!");
 }
