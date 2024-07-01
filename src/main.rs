@@ -7,7 +7,7 @@ fn main() {
 	name: String::from("Melaleuca"),
 	stock: 1,
     };
-//    create(item);
-    read(item);
+    create(item);
+    read(String::from("name"));
     println!("Sucess!");
 }
