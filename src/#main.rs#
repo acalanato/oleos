@@ -9,5 +9,4 @@ fn main() {
     };
     create(item);
     read(String::from("1"));
-    println!("Sucess!");
 }

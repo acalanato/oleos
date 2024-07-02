@@ -13,19 +13,24 @@ pub mod sqlite {
 CREATE TABLE IF NOT EXISTS users (name TEXT, age INTEGER);
 INSERT INTO users VALUES ('{0}', {1});
 ",item.name, item.stock);
-	connection.execute(query).unwrap()
+	connection.execute(query).unwrap();
+        println!("DB created!");
+
     }
-    pub fn read(column: String) {
+    pub fn read(column: &str) {
         use sqlite::State;
 	let connection = sqlite::open(BASE).unwrap();        
         let query = format!("SELECT * FROM users WHERE {} > ?", column);
         let mut statement = connection.prepare(query).unwrap();
         statement.bind((1, 50)).unwrap();
 
-        while let Ok(State::Row) = statement.next() {
-            println!("name = {}", statement.read::<String, _>("name").unwrap());
+        statement.read(column)
+            .ok().
+            expect(" ");
+//        while let Ok(State::Row) = statement.next() {
+//            println!("name = {}", statement.read::<String, _>("name").unwrap());
 //            println!("stock = {}", statement.read::<i64, _>("stock").unwrap());
-        }
+//        }
     }
     
     pub fn update() {
