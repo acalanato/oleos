@@ -13,6 +13,16 @@ INSERT INTO users VALUES ('{0}', {1});
 ",item.name, item.stock);
 	connection.execute(query).unwrap()
     }
+
+    pub fn list_all(){
+	let connection = sqlite::open(":memory:").unwrap();
+	let query = format!("
+SELECT name
+FROM sqlite_master;
+");
+	connection.execute(query).unwrap()
+    }
+    
     pub fn read() {
 	let connection = sqlite::open(":memory:").unwrap();
 
