@@ -13,7 +13,6 @@ pub mod sqlite {
 CREATE TABLE IF NOT EXISTS users (name TEXT, age INTEGER);
 INSERT INTO users VALUES ('{0}', {1});
 ",item.name, item.stock);
-<<<<<<< HEAD
 	connection.execute(query).unwrap()
     }
 
@@ -26,22 +25,13 @@ FROM sqlite_master;
 	connection.execute(query).unwrap()
     }
     
-    pub fn read() {
-	let connection = sqlite::open(":memory:").unwrap();
-=======
-	connection.execute(query).unwrap();
-        println!("DB created!");
->>>>>>> main
-
-    }
     pub fn read(column: &str) {
-        use sqlite::State;
 	let connection = sqlite::open(BASE).unwrap();        
         let query = format!("SELECT * FROM users WHERE {} > ?", column);
         let mut statement = connection.prepare(query).unwrap();
         statement.bind((1, 50)).unwrap();
 
-        statement.read(column)
+        statement.read::<Vec<u8>>(column)
             .ok().
             expect(" ");
 //        while let Ok(State::Row) = statement.next() {
